@@ -203,4 +203,4 @@ def getJsonKey(json_data):
 
 
 if __name__ == '__main__':
-    main(use_list=False, mode="author", value="209263")
+    main(use_list=False, mode="author", value="author id")
