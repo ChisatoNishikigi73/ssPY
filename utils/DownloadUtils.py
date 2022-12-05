@@ -7,15 +7,22 @@ def download_pic(http, path, p, headers=None):  # 下载pic
         headers = []
 
     r = requests.get(http, headers=headers, stream=True)
-    content_size = int(r.headers['Content-Length'])
-
-    with open(f'{path}/{p}.jpg', 'wb') as f:
-        for data in tqdm(
-                iterable=r.iter_content(1),
-                total=content_size,
-                unit='byte',
-                desc='下载中'):
-            f.write(data)
+    try:
+        content_size = int(r.headers['Content-Length'])
+        with open(f'{path}/{p}.jpg', 'wb') as f:
+            for data in tqdm(
+                    iterable=r.iter_content(1),
+                    total=content_size,
+                    unit='byte',
+                    desc='下载中'):
+                f.write(data)
+    except:
+        with open(f'{path}/{p}.jpg', 'wb') as f:
+            for data in tqdm(
+                    iterable=r.iter_content(1),
+                    unit='byte',
+                    desc='下载中'):
+                f.write(data)
 
 
 def download_pic_without_hualihushao(http, path, p, headers=None):  # 下载pic
